@@ -16,11 +16,11 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 const persistFilterConfig = {
-  key: 'filter',
+  key: 'name',
   storage,
 };
 const persistContactsConfig = {
-  key: 'contacts-data',
+  key: 'items',
   storage,
   // whitelist: ['contactsData'],
 };

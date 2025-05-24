@@ -5,31 +5,25 @@ import { useDebounce } from 'use-debounce';
 import { useEffect, useState } from 'react';
 
 export default function SearchBox() {
-  const [query, setQuery] = useState('');
-  const [debounce] = useDebounce(query, 500);
+  const queryLocation = useSelector((state) => state.contactFilterReducer.name);
+  const [query, setQuery] = useState(queryLocation);
+  const [debounce] = useDebounce(query, 1500);
   const dispatch = useDispatch();
-  const queryLocation = useSelector(
-    (state) => state.contactFilterReducer.searchQuery,
-  );
-
-  // setQuery(queryLocation);
 
   const inputChange = (event) => {
-    dispatch(changeFilter(event.target.value));
-    // setQuery(event.target.value);
+    setQuery(event.target.value);
   };
 
-  // useEffect(() => {
-  //   setQuery(queryLocation);
-  //   dispatch(changeFilter(debounce));
-  // }, [debounce]);
+  useEffect(() => {
+    dispatch(changeFilter(debounce));
+  }, [debounce]);
 
   return (
     <div className={css.searchBox}>
       <label htmlFor="searchBox">Find contacts by name</label>
       <input
         type="text"
-        value={queryLocation}
+        value={query}
         onChange={inputChange}
         id="searchBox"
         autoFocus

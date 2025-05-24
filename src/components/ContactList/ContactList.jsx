@@ -5,12 +5,10 @@ import { deleteContact } from '../../redux/contactsSlice';
 
 export default function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(
-    (state) => state.contactDataReducer.contactsData,
-  );
+  const contacts = useSelector((state) => state.contactDataReducer.items);
 
   const query = useSelector((state) => {
-    return state.contactFilterReducer.searchQuery;
+    return state.contactFilterReducer.name;
   });
 
   const visibleContact = contacts.filter((contact) =>
